@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import App from "./App";
 
-
-const App = () : JSX.Element => {
-    return <h1>Cryptonizer</h1>
-}
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
