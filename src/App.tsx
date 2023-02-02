@@ -1,24 +1,20 @@
 import React from "react";
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-
-
-const options =  {
-    title: {
-        text: 'Here is my highcharts'
-    },
-    series:[
-        {
-            data: [12,13,14]
-        }
-    ]
-}
+import { Link, Route } from "react-router-dom";
+import { Layout, Typography, Space } from "antd";
+import {Navbar} from './components'
 const App =  (): JSX.Element => {
     return (
-        <HighchartsReact
-            highcharts={Highcharts}
-            options={options}
-        />
+        <div className="app">
+            <div className="navbar">
+                <Navbar/>
+            </div>
+            <div className="main">
+                Main
+            </div>
+            <div className="footer">
+                Footer
+            </div>
+        </div>
     )
 }
 
