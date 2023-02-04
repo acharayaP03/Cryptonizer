@@ -11,13 +11,10 @@ const { Title }  = Typography;
 
 
 const Home = (): JSX.Element =>{
-    // @ts-ignore
-    const { data, isFetching } = useGetCryptosQuery();
+    const { data, isFetching } = useGetCryptosQuery(10);
     const globalStats = data?.data.stats
 
     if(isFetching) return <Spin />;
-
-
 
     return(
         <>
@@ -31,14 +28,14 @@ const Home = (): JSX.Element =>{
             </Row>
             <div className="home-heading-container">
                 <Title level={2} className="home-title">Top 10 Cryptocurrencies in the world</Title>
-                <Title level={2} className="home-title">
-                    <Link to='/'>Show more</Link>
+                <Title level={3}>
+                    <Link to='/cryptocurrencies'>Show more</Link>
                 </Title>
             </div>
-            <Cryptocurrencies/>
+            <Cryptocurrencies simplified/>
             <div className="home-heading-container">
                 <Title level={2} className="home-title">Latest Crypto News</Title>
-                <Title level={2} className="home-title">
+                <Title level={3}>
                     <Link to='/'>Show more</Link>
                 </Title>
             </div>
