@@ -29,10 +29,18 @@ const App =  (): JSX.Element => {
                        </Routes>
                    </div>
                </Layout>
+                <div className="footer">
+                    <Typography.Text strong style={{ color: '#fff', textAlign: 'center'}}>
+                        Cryptonizer <br/>
+                        All rights reserved.
+                    </Typography.Text>
+                    <Space>
+                        <Link to='/'>Home</Link>
+                        <Link to='/exchanges'>Exchange</Link>
+                        <Link to='/news'>News</Link>
+                    </Space>
+                </div>
             </div>
-            {/*<div className="footer">*/}
-            {/*    Footer*/}
-            {/*</div>*/}
         </div>
     )
 }
