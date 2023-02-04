@@ -49,11 +49,14 @@ a:hover{
     background-color: #001529;
     display: flex;
     padding: 20px;
+    justify-content: center;
     align-items: center;
     width: 100%;
 }
 .logo{
-    margin:0 0 0 15px;
+    margin:8px 0 0 10px;
+    justify-items: center;
+    vertical-align: baseline;
 }
 .logo a{
     color: white;
