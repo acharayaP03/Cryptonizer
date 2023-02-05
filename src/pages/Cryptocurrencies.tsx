@@ -14,14 +14,14 @@ const Cryptocurrencies : React.FC<Simplified>= ({ simplified })=>{
     const [ cryptos, setCryptos] = useState(cryptosList?.data?.coins);
 
 
-    if(isFetching) return <Spin />
+    if(isFetching) return <Spin className="loader"/>
     return(
         <>
             <Row gutter={[32,32]} className="crypto-card-container">
                 {
-                    cryptos?.map((currency: { id: string, rank: number, name: string, iconUrl: string, price: number, marketCap: number, change: number }) => (
-                        <Col xs={24} sm={12} lg={6} className="crypto-card" key={currency.id}>
-                            <Link to={`/crypto/${currency.id}`}>
+                    cryptos?.map((currency: { uuid: string, rank: number, name: string, iconUrl: string, price: number, marketCap: number, change: number }) => (
+                        <Col xs={24} sm={12} lg={6} className="crypto-card" key={currency.uuid}>
+                            <Link to={`/crypto/${currency.uuid}`}>
                                 <Card
                                     title={`${currency.rank}. ${currency.name}`}
                                     extra={<img className="crypto-image" src={currency.iconUrl}/>}
@@ -29,8 +29,8 @@ const Cryptocurrencies : React.FC<Simplified>= ({ simplified })=>{
                                     >
 
                                     <p>Price: { millify(currency.price)}</p>
-                                    <p>Price: { millify(currency.marketCap)}</p>
-                                    <p>Price: { millify(currency.change)}</p>
+                                    <p>Market Cap: { millify(currency.marketCap)}</p>
+                                    <p>Daily Change: { millify(currency.change)}</p>
                                 </Card>
                             </Link>
                         </Col>
