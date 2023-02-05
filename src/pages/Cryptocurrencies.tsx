@@ -23,9 +23,16 @@ const Cryptocurrencies : React.FC<Simplified>= ({ simplified })=>{
     if(isFetching) return <Spin className="loader"/>
     return(
         <>
-            <div className="search-crypto">
-                <Input placeholder="Search Cryptocurrency" onChange={(e) => setSearchTerm(e.target.value)}/>
-            </div>
+            {/*
+                Only show search bar on crypto page..
+            */}
+            {
+                !simplified && (
+                    <div className="search-crypto">
+                        <Input placeholder="Search Cryptocurrency" onChange={(e) => setSearchTerm(e.target.value)}/>
+                    </div>
+                )
+            }
             <Row gutter={[32,32]} className="crypto-card-container">
                 {
                     cryptos?.map((currency: { uuid: string, rank: number, name: string, iconUrl: string, price: number, marketCap: number, change: number }) => (
