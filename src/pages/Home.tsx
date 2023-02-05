@@ -14,7 +14,7 @@ const Home = (): JSX.Element =>{
     const { data, isFetching } = useGetCryptosQuery(10);
     const globalStats = data?.data.stats
 
-    if(isFetching) return <Spin />;
+    if(isFetching) return <Spin className="loader"/>;
 
     return(
         <>
