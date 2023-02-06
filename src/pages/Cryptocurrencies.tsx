@@ -20,6 +20,7 @@ const Cryptocurrencies : React.FC<Simplified>= ({ simplified })=>{
     }, [cryptosList, searchTerm])
 
     if(isFetching) return <Spin className="loader"/>
+
     return(
         <>
             {/*

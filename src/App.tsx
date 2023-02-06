@@ -22,7 +22,7 @@ const App =  (): JSX.Element => {
                            <Route path="/cryptocurrencies" element={<Cryptocurrencies/>}/>
                        </Routes>
                        <Routes>
-                           <Route path="/crypto/:coidId" element={<CryptoDetails/>}/>
+                           <Route path="/crypto/:coinId" element={<CryptoDetails/>}/>
                        </Routes>
                        <Routes>
                            <Route path="/news" element={<News/>}/>
