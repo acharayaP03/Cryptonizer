@@ -5,7 +5,7 @@ import millify from 'millify';
 import LineChart from '../components/LineChar'
 import {Col, Row, Typography, Select, Spin} from 'antd';
 import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, NumberOutlined, ThunderboltOutlined } from '@ant-design/icons';
-import {useGetCryptoDetailsQuery, useGetCryptoHistoryQuery} from "../services/cryptoApi";
+import {useGetCryptoDetailsQuery, useGetCryptoHistoryQuery, useGetCryptoCurrencyUuidQuery} from "../services/cryptoApi";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -13,11 +13,23 @@ const { Option } = Select;
 const CryptoDetails = (): JSX.Element =>{
     const { coinId } = useParams();
     const [timeperiod, setTimeperiod] = useState('7d');
-
+    const [currency, setCurrency] = useState("USD")
+    const [referenceUuid, setReferenceUuid] = useState('yhjMzLPhuIDl')
+    // @ts-ignore
+    /**
+     * before making request to the coin history, we need to get the reference to the coin uuid
+     */
     const { data, isFetching } = useGetCryptoDetailsQuery(coinId)
-    const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timeperiod })
+    // @ts-ignore
+    const { data: currencyReference } = useGetCryptoCurrencyUuidQuery();
+    const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, referenceUuid, timeperiod })
 
     const cryptoDetails = data?.data?.coin;
+
+    const fetchCurrency = (value) =>{
+        currencyReference.data.currencies.map(currency => setCurrency(currency.symbol))
+        currencyReference.data.currencies.map(currency => setReferenceUuid(currency.uuid))
+    }
 
     if(isFetching) return <Spin className="loader"/>
 
@@ -43,14 +55,17 @@ const CryptoDetails = (): JSX.Element =>{
         <Col className="coin-detail-container">
             <Col className="coin-heading-container">
                 <Title level={2} className="coin-name">
-                    {data?.data?.coin.name} ({data?.data?.coin.slug}) Price
+                    {data?.data?.coin.name} ({data?.data?.coin.websiteUrl}) Price
                 </Title>
                 <p>{cryptoDetails.name} live price in US Dollar (USD). View value statistics, market cap and supply.</p>
             </Col>
             <Select defaultValue="7d" className="select-timeperiod" placeholder="Select Timeperiod" onChange={(value) => setTimeperiod(value)}>
                 {time.map((date) => <Option key={date}>{date}</Option>)}
             </Select>
-            {/*<LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price)} coinName={cryptoDetails.name} />*/}
+            <Select defaultValue={currency} className="select-timeperiod" placeholder="Select Currency" onChange={(value) => fetchCurrency(value)}>
+                { currencyReference && currencyReference.data.currencies.map(currency => <Option key={currency.uuid}>{currency.name}</Option>)}
+            </Select>
+            <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price)} coinName={cryptoDetails.name} />
             <Col className="stats-container">
                 <Col className="coin-value-statistics">
                     <Col className="coin-value-statistics-heading">
