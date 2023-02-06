@@ -1,11 +1,28 @@
 import React from 'react';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Tooltip,
+    Legend,
+} from 'chart.js';
 import { Line } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions } from "chart.js";
-
-
 import { Col, Row, Typography } from 'antd';
+
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Tooltip,
+    Legend
+);
+
 const { Title } = Typography;
-ChartJS.register(ArcElement, Tooltip, Legend);
+
 interface ChartProps {
     coinHistory: { data: { change: number, history: [{ price: number | string, timestamp: string }] } },
     currentPrice: number | string,
@@ -36,17 +53,17 @@ const LineChart: React.FC<ChartProps> = ({ coinHistory, currentPrice, coinName})
     }
 
 
-    const options: ChartOptions ={
-        scales: {
-            // @ts-ignore
-            yAxis: [
-                {
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }
-            ]
-        }
+    const options ={
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top' as const,
+            },
+            title: {
+                display: true,
+                text: 'Chart.js Line Chart',
+            },
+        },
     }
 
     return(
@@ -62,7 +79,7 @@ const LineChart: React.FC<ChartProps> = ({ coinHistory, currentPrice, coinName})
                     <Title level={5} className="current-price">Current { coinName } Price: $ { currentPrice }</Title>
                 </Col>
             </Row>
-            <Line data={data}/>
+            <Line data={data} options={options}/>
         </>
     )
 }
