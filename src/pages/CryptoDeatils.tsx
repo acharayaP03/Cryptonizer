@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import HTMLReactParser from 'html-react-parser';
 import { useParams } from 'react-router-dom';
 import millify from 'millify';
-import LineChart from '../components/LineChar'
+import {LineChart} from '../components'
 import {Col, Row, Typography, Select, Spin} from 'antd';
 import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, NumberOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import {useGetCryptoDetailsQuery, useGetCryptoHistoryQuery, useGetCryptoCurrencyUuidQuery} from "../services/cryptoApi";
