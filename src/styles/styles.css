@@ -386,6 +386,12 @@ a:hover{
     margin-top: 20px !important;
 }
 
+.exchange-select{
+    display: block;
+    max-width: 25%;
+    margin: 0 auto 20px auto;
+}
+
 .footer {
     z-index: 1;
     position: fixed;
